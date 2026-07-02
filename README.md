@@ -3,7 +3,7 @@
 [![CI](https://github.com/DevTM71/digital-wallet-api/actions/workflows/ci.yml/badge.svg)](https://github.com/DevTM71/digital-wallet-api/actions)
 ![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![Pytest](https://img.shields.io/badge/pytest-32%20testes-0A9EDC?logo=pytest&logoColor=white)
+![Pytest](https://img.shields.io/badge/pytest-33%20testes-0A9EDC?logo=pytest&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
 
 API de carteira digital construída com **FastAPI** aplicando **DDD** (Domain-Driven Design) e **Event Sourcing**. Aqui o estado nunca é armazenado diretamente: toda mudança é um **evento imutável** gravado em um fluxo append-only, e o saldo de cada carteira é **reconstruído por replay** dos seus eventos. A consequência prática é poderosa — o extrato não é uma tabela mantida à parte que pode divergir do saldo: **o extrato É o fluxo de eventos**, auditoria completa de graça.
