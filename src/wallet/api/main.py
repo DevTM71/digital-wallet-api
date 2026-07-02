@@ -78,7 +78,7 @@ async def tratar_carteira_nao_encontrada(
 @app.exception_handler(InvalidAmountError)
 async def tratar_quantia_invalida(request: Request, exc: InvalidAmountError) -> JSONResponse:
     return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
         content={"detail": "Valor inválido."},
     )
 
