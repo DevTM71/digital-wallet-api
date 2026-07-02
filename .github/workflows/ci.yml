@@ -1,0 +1,26 @@
+# Integração contínua: roda a suíte de testes em cada push na main e em PRs.
+# Nenhuma dependência local: o pythonpath=src do pytest.ini resolve os imports
+# e os testes usam SQLite em memória.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # Mesma versão do desenvolvimento local e do Dockerfile
+          python-version: "3.14"
+
+      - name: Instalar dependências
+        run: pip install -r requirements-dev.txt
+
+      - name: Rodar testes
+        run: pytest
