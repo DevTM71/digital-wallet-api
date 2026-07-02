@@ -17,6 +17,16 @@ Testes ficam em `tests/unit/` (domínio e aplicação, sem I/O) e `tests/integra
 
 **O estado nunca é persistido diretamente.** A única fonte de verdade são os eventos de domínio, gravados em ordem no event store. O estado de um agregado é sempre reconstruído por *replay*: carrega-se o histórico de eventos e aplica-se cada um, na ordem, sobre uma instância vazia. Qualquer mudança de estado nasce de um novo evento — nunca de um UPDATE em uma linha de "saldo".
 
+## Comandos
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt  # setup
+.venv/bin/python -m pytest                                              # testes
+.venv/bin/uvicorn --app-dir src wallet.api.main:app --reload            # API (docs em /docs)
+```
+
+O banco padrão é `sqlite:///./wallet_events.db` (sobrescreva com a env `DATABASE_URL`); o arquivo é gitignorado.
+
 ## Convenções
 
 - Código, docstrings e mensagens de erro em **português**.
