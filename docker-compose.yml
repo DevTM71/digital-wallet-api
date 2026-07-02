@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # SQLite gravado no volume nomeado, sobrevivendo a recriações do container.
+      # Em produção, troque por um PostgreSQL gerenciado, por exemplo:
+      #   DATABASE_URL: "postgresql+psycopg2://usuario:senha@db-host:5432/wallet"
+      # (adicione psycopg2-binary ao requirements.txt; nenhuma outra mudança é
+      # necessária — o EventStore recebe a URL e o SQLAlchemy cuida do dialeto)
+      DATABASE_URL: "sqlite:////data/wallet_events.db"
+    volumes:
+      - wallet_data:/data
+
+volumes:
+  wallet_data:
