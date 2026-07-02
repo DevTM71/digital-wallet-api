@@ -1,0 +1,23 @@
+# Ambiente virtual
+.venv/
+venv/
+
+# Bytecode e caches do Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Banco de dados local (event store)
+wallet_events.db
+
+# Distribuição / build
+build/
+dist/
+*.egg-info/
+
+# Sistema operacional
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
