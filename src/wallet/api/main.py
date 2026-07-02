@@ -6,9 +6,11 @@ responsabilidade própria é o protocolo — validar a borda com os schemas,
 injetar dependências e traduzir exceções de domínio em códigos HTTP.
 """
 
+import os
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from wallet.application.commands import DepositFunds, OpenWallet, WithdrawFunds
@@ -37,6 +39,20 @@ app = FastAPI(
         "todo estado é derivado de um fluxo append-only de eventos de domínio."
     ),
     version="1.0.0",
+)
+
+# Origens permitidas para clientes web (front-end), separadas por vírgula
+_origens_cors = [
+    origem.strip()
+    for origem in os.environ.get("CORS_ORIGINS", "http://localhost:3000").split(",")
+    if origem.strip()
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_origens_cors,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 # Singleton de módulo, criado sob demanda para evitar efeito colateral

@@ -10,6 +10,8 @@ services:
       # (adicione psycopg2-binary ao requirements.txt; nenhuma outra mudança é
       # necessária — o EventStore recebe a URL e o SQLAlchemy cuida do dialeto)
       DATABASE_URL: "sqlite:////data/wallet_events.db"
+      # Origens permitidas para clientes web, separadas por vírgula
+      CORS_ORIGINS: "http://localhost:3000"
     volumes:
       - wallet_data:/data
 

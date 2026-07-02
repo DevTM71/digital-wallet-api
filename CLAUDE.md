@@ -25,7 +25,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt  # setup
 .venv/bin/uvicorn --app-dir src wallet.api.main:app --reload            # API (docs em /docs)
 ```
 
-O banco padrão é `sqlite:///./wallet_events.db` (sobrescreva com a env `DATABASE_URL`); o arquivo é gitignorado.
+## Configuração (variáveis de ambiente)
+
+- `DATABASE_URL` — URL do banco de eventos; default `sqlite:///./wallet_events.db` (arquivo gitignorado).
+- `CORS_ORIGINS` — origens permitidas para clientes web, separadas por vírgula; default `http://localhost:3000` (front-end Next.js local).
 
 ## Convenções
 

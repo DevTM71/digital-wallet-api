@@ -100,3 +100,15 @@ class TestErros:
         resposta = client.post("/wallets", json={"owner_name": ""})
 
         assert resposta.status_code == 422  # validação de borda do Pydantic
+
+
+class TestCors:
+    def test_origem_permitida_recebe_header_de_cors(self, client: TestClient) -> None:
+        origem = "http://localhost:3000"
+
+        resposta = client.post(
+            "/wallets", json={"owner_name": "Alice"}, headers={"Origin": origem}
+        )
+
+        assert resposta.status_code == 201
+        assert resposta.headers["access-control-allow-origin"] == origem
