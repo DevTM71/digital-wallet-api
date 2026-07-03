@@ -8,6 +8,8 @@
 
 API de carteira digital construída com **FastAPI** aplicando **DDD** (Domain-Driven Design) e **Event Sourcing**. Aqui o estado nunca é armazenado diretamente: toda mudança é um **evento imutável** gravado em um fluxo append-only, e o saldo de cada carteira é **reconstruído por replay** dos seus eventos. A consequência prática é poderosa — o extrato não é uma tabela mantida à parte que pode divergir do saldo: **o extrato É o fluxo de eventos**, auditoria completa de graça.
 
+> 🖥️ **Interface web:** este projeto tem um front-end em Next.js + TypeScript — [digital-wallet-web](https://github.com/DevTM71/digital-wallet-web).
+
 ## Arquitetura
 
 Quatro camadas com dependências apontando sempre para o domínio:
