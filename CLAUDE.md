@@ -30,11 +30,15 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt  # setup
 - `DATABASE_URL` — URL do banco de eventos; default `sqlite:///./wallet_events.db` (arquivo gitignorado).
 - `CORS_ORIGINS` — origens permitidas para clientes web, separadas por vírgula; default `http://localhost:3000` (front-end Next.js local).
 
+O Python do projeto é **3.14**, fixado em três lugares que devem andar juntos: `.venv` local, `Dockerfile` (`python:3.14-slim`) e CI (`python-version` em `.github/workflows/ci.yml`).
+
 ## Convenções
 
-- Código, docstrings e mensagens de erro em **português**.
+- Docstrings, comentários, mensagens de erro e variáveis locais em **português**; identificadores públicos (classes, métodos, campos) em **inglês** (`Wallet.open`, `handle_deposit`).
 - **Type hints sempre**, em todas as assinaturas de funções e métodos.
 - **Testes obrigatórios para toda regra de negócio** — nenhuma regra de domínio entra sem teste unitário cobrindo o caso feliz e os casos de erro.
+- Isolamento nos testes: `EventStore("sqlite:///:memory:")`; testes de API sobrescrevem as factories `get_command_handler`/`get_query_service` via `app.dependency_overrides`.
+- Ao mudar a contagem de testes, atualize o badge `pytest-N%20testes` no README.md (em commit `docs` separado).
 
 ## Versionamento (Git)
 
