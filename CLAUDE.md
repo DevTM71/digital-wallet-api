@@ -39,7 +39,7 @@ A API roda no Render (runtime Docker) com PostgreSQL gerenciado no Neon. Variáv
 - `DATABASE_URL` — connection string do Neon, com o esquema ajustado para `postgresql+psycopg2://...` (o SQLAlchemy 2 não aceita o prefixo `postgres://` que o Neon fornece; mantenha o `?sslmode=require`).
 - `CORS_ORIGINS` — origem do front-end em produção.
 
-O Render injeta `PORT` (o CMD do Dockerfile a respeita via `${PORT:-8000}`) e o health check path é `GET /health`.
+O Render injeta `PORT` (o CMD do Dockerfile a respeita via `${PORT:-8000}`) e o health check path é `/health` — a rota deve aceitar **GET e HEAD** (o monitor de uptime externo usa HEAD).
 
 ## Convenções
 
