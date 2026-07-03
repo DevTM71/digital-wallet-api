@@ -34,7 +34,12 @@ O Python do projeto é **3.14**, fixado em três lugares que devem andar juntos:
 
 ## Deploy (Render + Neon)
 
-A API roda no Render (runtime Docker) com PostgreSQL gerenciado no Neon. Variáveis de ambiente:
+A API roda no Render (runtime Docker) com PostgreSQL gerenciado no Neon. URLs de produção:
+
+- API: https://digital-wallet-api-kh9c.onrender.com (Swagger em `/docs`)
+- Front-end (Vercel): https://digital-wallet-portfolio.vercel.app
+
+Variáveis de ambiente:
 
 - `DATABASE_URL` — connection string do Neon, com o esquema ajustado para `postgresql+psycopg2://...` (o SQLAlchemy 2 não aceita o prefixo `postgres://` que o Neon fornece; mantenha o `?sslmode=require`).
 - `CORS_ORIGINS` — origem do front-end em produção.
