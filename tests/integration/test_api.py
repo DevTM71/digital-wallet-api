@@ -102,6 +102,14 @@ class TestErros:
         assert resposta.status_code == 422  # validação de borda do Pydantic
 
 
+class TestHealth:
+    def test_health_retorna_ok(self, client: TestClient) -> None:
+        resposta = client.get("/health")
+
+        assert resposta.status_code == 200
+        assert resposta.json() == {"status": "ok"}
+
+
 class TestCors:
     def test_origem_permitida_recebe_header_de_cors(self, client: TestClient) -> None:
         origem = "http://localhost:3000"

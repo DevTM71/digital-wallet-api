@@ -32,6 +32,15 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt  # setup
 
 O Python do projeto é **3.14**, fixado em três lugares que devem andar juntos: `.venv` local, `Dockerfile` (`python:3.14-slim`) e CI (`python-version` em `.github/workflows/ci.yml`).
 
+## Deploy (Render + Neon)
+
+A API roda no Render (runtime Docker) com PostgreSQL gerenciado no Neon. Variáveis de ambiente:
+
+- `DATABASE_URL` — connection string do Neon, com o esquema ajustado para `postgresql+psycopg2://...` (o SQLAlchemy 2 não aceita o prefixo `postgres://` que o Neon fornece; mantenha o `?sslmode=require`).
+- `CORS_ORIGINS` — origem do front-end em produção.
+
+O Render injeta `PORT` (o CMD do Dockerfile a respeita via `${PORT:-8000}`) e o health check path é `GET /health`.
+
 ## Convenções
 
 - Docstrings, comentários, mensagens de erro e variáveis locais em **português**; identificadores públicos (classes, métodos, campos) em **inglês** (`Wallet.open`, `handle_deposit`).

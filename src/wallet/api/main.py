@@ -116,6 +116,12 @@ async def tratar_conflito_de_concorrencia(
 # --- Rotas -------------------------------------------------------------------
 
 
+@app.get("/health", summary="Health check da aplicação")
+def health() -> dict[str, str]:
+    """Usado pelo health check da plataforma de deploy; não toca o banco."""
+    return {"status": "ok"}
+
+
 @app.post(
     "/wallets",
     status_code=status.HTTP_201_CREATED,

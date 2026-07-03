@@ -12,5 +12,7 @@ COPY src/ src/
 
 EXPOSE 8000
 
-# --app-dir src coloca o pacote wallet no caminho de import, como no pytest.ini
-CMD ["uvicorn", "--app-dir", "src", "wallet.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# --app-dir src coloca o pacote wallet no caminho de import, como no pytest.ini.
+# Forma shell para expandir ${PORT} (plataformas como o Render injetam a porta);
+# o exec substitui o sh, garantindo que o uvicorn receba os sinais do container.
+CMD exec uvicorn --app-dir src wallet.api.main:app --host 0.0.0.0 --port ${PORT:-8000}
