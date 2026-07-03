@@ -116,9 +116,10 @@ async def tratar_conflito_de_concorrencia(
 # --- Rotas -------------------------------------------------------------------
 
 
-@app.get("/health", summary="Health check da aplicação")
+@app.api_route("/health", methods=["GET", "HEAD"], summary="Health check da aplicação")
 def health() -> dict[str, str]:
-    """Usado pelo health check da plataforma de deploy; não toca o banco."""
+    """Usado pelos health checks da plataforma de deploy e do monitor de uptime
+    (que envia HEAD); não toca o banco."""
     return {"status": "ok"}
 
 

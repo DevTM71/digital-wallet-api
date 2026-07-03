@@ -109,6 +109,12 @@ class TestHealth:
         assert resposta.status_code == 200
         assert resposta.json() == {"status": "ok"}
 
+    def test_health_aceita_head_sem_corpo(self, client: TestClient) -> None:
+        resposta = client.head("/health")
+
+        assert resposta.status_code == 200
+        assert resposta.content == b""
+
 
 class TestCors:
     def test_origem_permitida_recebe_header_de_cors(self, client: TestClient) -> None:
