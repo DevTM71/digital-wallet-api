@@ -7,8 +7,8 @@ services:
       # SQLite gravado no volume nomeado, sobrevivendo a recriações do container.
       # Em produção, troque por um PostgreSQL gerenciado, por exemplo:
       #   DATABASE_URL: "postgresql+psycopg2://usuario:senha@db-host:5432/wallet"
-      # (adicione psycopg2-binary ao requirements.txt; nenhuma outra mudança é
-      # necessária — o EventStore recebe a URL e o SQLAlchemy cuida do dialeto)
+      # (o driver psycopg2 já está no requirements.txt; o EventStore recebe a
+      # URL e o SQLAlchemy cuida do dialeto)
       DATABASE_URL: "sqlite:////data/wallet_events.db"
       # Origens permitidas para clientes web, separadas por vírgula
       CORS_ORIGINS: "http://localhost:3000"
