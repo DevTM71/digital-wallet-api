@@ -8,6 +8,10 @@
 
 API de carteira digital construída com **FastAPI** aplicando **DDD** (Domain-Driven Design) e **Event Sourcing**. Aqui o estado nunca é armazenado diretamente: toda mudança é um **evento imutável** gravado em um fluxo append-only, e o saldo de cada carteira é **reconstruído por replay** dos seus eventos. A consequência prática é poderosa — o extrato não é uma tabela mantida à parte que pode divergir do saldo: **o extrato É o fluxo de eventos**, auditoria completa de graça.
 
+> 🌐 **Demo ao vivo:** API em [digital-wallet-api-kh9c.onrender.com/docs](https://digital-wallet-api-kh9c.onrender.com/docs) (Swagger) · Interface web em [digital-wallet-portfolio.vercel.app](https://digital-wallet-portfolio.vercel.app)
+>
+> **Ambiente de demonstração:** hospedado em serviços gratuitos (Render + Neon + Vercel) com monitoramento de uptime; os dados são de teste e podem ser limpos periodicamente.
+
 > 🖥️ **Interface web:** este projeto tem um front-end em Next.js + TypeScript — [digital-wallet-web](https://github.com/DevTM71/digital-wallet-web).
 
 ## Arquitetura
@@ -153,7 +157,7 @@ A suíte completa roda no **GitHub Actions** a cada push e pull request — badg
 
 ## Persistência
 
-Por padrão os eventos são gravados em **SQLite** (`wallet_events.db`). A URL do banco vem da variável de ambiente `DATABASE_URL`, então trocar para **PostgreSQL** em produção é uma linha de configuração:
+Por padrão os eventos são gravados em **SQLite** (`wallet_events.db`). A URL do banco vem da variável de ambiente `DATABASE_URL`, então trocar de banco é uma linha de configuração — é assim que a produção roda, com **PostgreSQL gerenciado (Neon)**:
 
 ```bash
 DATABASE_URL="postgresql+psycopg2://usuario:senha@db-host:5432/wallet"
